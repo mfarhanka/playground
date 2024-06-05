@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Transformer</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        textarea {
+            width: 400px;
+            height: 150px;
+            margin-bottom: 10px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #output {
+            margin-top: 10px;
+            width: 400px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        label {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .output-link {
+            display: block;
+            margin-top: 10px;
+            font-size: 16px;
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <textarea id="input" placeholder="Paste URL here..."></textarea>
+        <br>
+        <label>Edit Page</label>
+        <br>
+        <button onclick="transformUrl('EN')">EN</button>
+        <button onclick="transformUrl('BM')">BM</button>
+        <button onclick="transformUrl('CH')">CH</button>
+        <div id="output"></div>
+    </div>
+    <script>
+        function transformUrl(language) {
+            const input = document.getElementById('input').value;
+            const urlPattern = /^https:\/\/www\.u\.com\.my\/([^\/]+)\/personal\/mobile-plans\/roaming-idd\/roaming#(.*)$/;
+            const match = input.match(urlPattern);
+
+            if (match) {
+                let transformedUrl = `https://author-aem-prod.u.com.my/content/u-mobile/${language.toLowerCase()}/personal/mobile-plans/roaming-idd/roaming.html?wcmmode=disabled`;
+                if (language === 'EN') {
+                    transformedUrl = `https://author-aem-prod.u.com.my/content/u-mobile/en/personal/mobile-plans/roaming-idd/roaming.html?wcmmode=disabled`;
+                }
+
+                window.location.href = transformedUrl;
+            } else {
+                document.getElementById('output').innerText = 'Invalid URL format';
+            }
+        }
+    </script>
+</body>
+</html>
